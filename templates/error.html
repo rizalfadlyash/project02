@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="My Word List" />
+    <meta property="og:description" content="A collection of my words" />
+    <meta property="og:image" content="{{url_for('static', filename='logo_red.png')}}" />
+
+    <link rel="shortcut icon" href="{{url_for('static', filename='favico.ico')}}" type="image/x-icon" />
+    <link rel="icon" href="{{url_for('static', filename='favico.ico')}}" type="image/x-icon" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Personal Diary</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link href="{{ url_for('static', filename='mystyle.css')}}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="banner" onclick="window.location.href = '/'; "></div>
+        <div class="container mt-5">
+            <h2>Your word, "{{ word }}", could not be found</h2>
+            {% if suggested_words %}
+            <p>Here are some suggested words:</p>
+            <div class="suggested-words">
+                {% for suggested_word in suggested_words %}
+                <form action="{{ url_for('main') }}" method="GET" style="display: inline;">
+                    <a href="{{ url_for('main', msg=suggested_word) }}" class="btn suggested-word-btn">{{ suggested_word }}</a>
+                    <button type="submit" class="btn btn-primary" name="msg" value="{{ suggested_word }}">{{ suggested_word }}</button>
+                </form>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="/detail/example" class="nav-link px-2 text-muted">Detail Page</a></li>
+            </ul>
+            <p class="text-center text-muted">© 2024 Vernanda Fazira</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
